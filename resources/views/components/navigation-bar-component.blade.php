@@ -26,11 +26,11 @@
                     <x-feathericon-instagram />
                 </a>
                 <a href="#tiktok" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                    <x-ri-tiktok-line />
+                    <x-iconoir-tiktok />
                 </a>
                 <button
                     class="bg-black text-white px-4 py-2 rounded-full hover:bg-yellow-400 hover:text-black transition-colors duration-200">
-                    Book session
+                    Book a session
                 </button>
             </div>
 
