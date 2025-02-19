@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
+            $table->string('address')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('tiktok')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('youtube')->nullable();
             $table->timestamps();
         });
     }
