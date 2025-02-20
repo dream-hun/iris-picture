@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+Route::get('/booking', [BookingController::class, 'create'])->name('booking.index');
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 
 Route::get('/dashboard', function () {

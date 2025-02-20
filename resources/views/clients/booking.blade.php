@@ -117,54 +117,107 @@
                     </dl>
                 </div>
             </div>
-            <form action="#" method="POST" class="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+            <form action="{{ route('booking.store') }}" method="POST" class="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+                @csrf
                 <div class="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
+                    @if ($errors->any())
+                        <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    @if (session('success'))
+                        <div class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>
-                            <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">First
-                                name</label>
+                            <label for="name" class="block text-sm font-semibold leading-6 text-gray-900">Name</label>
                             <div class="mt-2.5">
-                                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <input type="text" name="name" id="name" value="{{ old('name') }}" required
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('name') ring-red-500 @enderror">
+                                @error('name')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
+
                         <div>
-                            <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Last
-                                name</label>
+                            <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
                             <div class="mt-2.5">
-                                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <input type="email" name="email" id="email" value="{{ old('email') }}" required
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('email') ring-red-500 @enderror">
+                                @error('email')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
+
                         <div class="sm:col-span-2">
-                            <label for="email"
-                                class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
+                            <label for="phone" class="block text-sm font-semibold leading-6 text-gray-900">Phone number</label>
                             <div class="mt-2.5">
-                                <input type="email" name="email" id="email" autocomplete="email"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <input type="tel" name="phone" id="phone" value="{{ old('phone') }}" required
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('phone') ring-red-500 @enderror">
+                                @error('phone')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
+
                         <div class="sm:col-span-2">
-                            <label for="phone-number"
-                                class="block text-sm font-semibold leading-6 text-gray-900">Phone number</label>
+                            <label for="service_id" class="block text-sm font-semibold leading-6 text-gray-900">Service</label>
                             <div class="mt-2.5">
-                                <input type="tel" name="phone-number" id="phone-number" autocomplete="tel"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <select name="service_id" id="service_id" required
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('service_id') ring-red-500 @enderror">
+                                    <option value="">Select a service</option>
+                                    @foreach($services as $service)
+                                        <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>
+                                            {{ $service->name }} - {{ $service->time }} - ${{ $service->price }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('service_id')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
-                        <div class="sm:col-span-2">
-                            <label for="message"
-                                class="block text-sm font-semibold leading-6 text-gray-900">Message</label>
+
+                        <div>
+                            <label for="date" class="block text-sm font-semibold leading-6 text-gray-900">Date</label>
                             <div class="mt-2.5">
-                                <textarea name="message" id="message" rows="4"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                <input type="date" name="date" id="date" value="{{ old('date') }}" required min="{{ date('Y-m-d') }}"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('date') ring-red-500 @enderror">
+                                @error('date')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="time" class="block text-sm font-semibold leading-6 text-gray-900">Time</label>
+                            <div class="mt-2.5">
+                                <input type="time" name="time" id="time" value="{{ old('time') }}" required
+                                    min="09:00" max="17:00" step="3600"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('time') ring-red-500 @enderror">
+                                @error('time')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                                <p class="mt-1 text-sm text-gray-500">Business hours are 9:00 AM to 5:00 PM</p>
                             </div>
                         </div>
                     </div>
+
                     <div class="mt-8 flex justify-end">
                         <button type="submit"
-                            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Send
-                            message</button>
+                            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            Book Appointment
+                        </button>
                     </div>
                 </div>
             </form>
