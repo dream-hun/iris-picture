@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Service extends Model
 {
-    protected $fillable = ['name', 'description', 'price'];
+    protected $fillable = ['name', 'description', 'price', 'featured_image'];
 
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class);
     }
+
     public function formattedPrice(): string
     {
         return Money::CAD($this->price)->format();

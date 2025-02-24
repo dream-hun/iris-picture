@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home-Irispictures</title>
+    <title>Home - Irispictures</title>
     <meta name="description"
         content="Professional photography services and portfolio showcase. Capturing life's beautiful moments with artistic vision in canada.">
     <meta name="keywords"
@@ -41,10 +41,11 @@
                     Where Every Moment Becomes a Masterpiece!
                 </p>
             </div>
-            <button
-                class="bg-yellow-400 text-black px-8 py-3 rounded-full hover:bg-yellow-300 transition-colors duration-200">
+            <a
+                class="bg-yellow-400 text-black px-8 py-3 rounded-full hover:bg-yellow-300 transition-colors duration-200"
+                href="{{ route('booking.index') }}">
                 Book Your Photoshoot Today!
-            </button>
+            </a>
         </div>
     </div>
 

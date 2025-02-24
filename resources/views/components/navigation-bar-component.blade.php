@@ -12,14 +12,16 @@
         <div class="flex justify-between items-center h-16">
             <!-- Left Navigation -->
             <div class="hidden md:flex space-x-8">
-                <a href="#about"
-                    :class="{ 'text-yellow-400': isActive('/', 'about'), 'text-gray-600': !isActive('/', 'about') }"
+                <a href="{{route('home')}}"
+                    :class="{ 'text-yellow-400': isActive('/', 'home'), 'text-gray-600': !isActive('/', 'home') }"
                     class="hover:text-gray-900 transition-colors duration-200">
-                    About
+                    Home
                 </a>
-                <a href="{{ route('services') }}"
-                    :class="{ 'text-yellow-400': isActive('{{ route('services') }}'), 'text-gray-600': !isActive(
-                            '{{ route('services') }}') }"
+                <a href="{{route('our-services')}}"
+                    :class="{
+                        'text-yellow-400': isActive('/our-services'),
+                        'text-gray-600': !isActive('/our-services')
+                    }"
                     class="hover:text-gray-900 transition-colors duration-200">
                     Services
                 </a>
@@ -29,8 +31,11 @@
                     Portfolio
                 </a>
                 <a href="#testimonials"
-                    :class="{ 'text-yellow-400': isActive('/', 'testimonials'), 'text-gray-600': !isActive('/',
-                        'testimonials') }"
+                    :class="{
+                        'text-yellow-400': isActive('/', 'testimonials'),
+                        'text-gray-600': !isActive('/',
+                            'testimonials')
+                    }"
                     class="hover:text-gray-900 transition-colors duration-200">
                     Testimonials
                 </a>
@@ -45,18 +50,19 @@
 
             <!-- Right Social Icons & CTA -->
             <div class="hidden md:flex items-center space-x-6">
-                <a href="{{ $setting->instagram }}"
+                <a href="{{ $setting->instagram }}" target="_blank"
                     class="text-gray-600 hover:text-gray-900 transition-colors duration-200">
                     <x-feathericon-instagram />
                 </a>
-                <a href="{{ $setting->tiktok }}"
+                <a href="{{ $setting->tiktok }}" target="_blank"
                     class="text-gray-600 hover:text-gray-900 transition-colors duration-200">
                     <x-iconoir-tiktok />
                 </a>
-                <button
-                    class="bg-black text-white px-4 py-2 rounded-full hover:bg-yellow-400 hover:text-black transition-colors duration-200">
+                <a
+                    class="bg-black text-white px-4 py-2 rounded-full hover:bg-yellow-400 hover:text-black transition-colors duration-200"
+                    href="{{ route('booking.index') }}">
                     Book a session
-                </button>
+                </a>
             </div>
 
             <!-- Mobile menu button -->
