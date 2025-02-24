@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+Route::get('/services', ServiceController::class)->name('services');
 
 Route::get('/booking', [BookingController::class, 'create'])->name('booking.index');
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');

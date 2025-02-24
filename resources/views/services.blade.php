@@ -60,22 +60,15 @@
             <img src="{{ asset('images/iris-hero-two.webp') }}" alt="Skyscraper" class="w-full h-auto object-cover" />
         </div>
 
-        <!-- Right Column with 2 Images -->
-        <div class="space-y-4">
-            <div class="aspect-w-4 aspect-h-3">
-                <img src="{{ asset('images/iris-hero-three.webp') }}" alt="Motion blur city"
-                    class="w-full h-200 object-cover" />
-            </div>
-            <div class="aspect-w-4 aspect-h-3">
-                <img src="{{ asset('images/iris-hero-four.webp') }}" alt="Silhouette"
-                    class="w-full h-200 object-cover" />
-            </div>
+        <!-- Small Image 1 -->
+        <div class="aspect-w-4 aspect-h-5">
+            <img src="{{ asset('images/iris-hero-three.webp') }}" alt="Cityscape" class="w-full h-auto object-cover" />
         </div>
-    </div>
-    <x-about-component />
-    <x-gallery-component />
-    <x-footer-component />
 
+        <!-- Small Image 2 -->
+        <div class="aspect-w-4 aspect-h-5">
+            <img src="{{ asset('images/iris-hero-four.webp') }}" alt="Sunset" class="w-full h-auto object-cover" />
+        </div>
 </body>
 
 </html>

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Jackson MALIMBA',
             'email' => 'irispicture001@gmail.com',
         ]);
-        $this->call(ServiceSeeder::class);
+        $this->call([ServiceSeeder::class, SettingSeeder::class]);
+
     }
 }

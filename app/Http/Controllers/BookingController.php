@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
-use App\Models\Booking;
 use App\Enums\BookingStatus;
+use App\Models\Booking;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,6 +13,7 @@ class BookingController extends Controller
     public function create()
     {
         $services = Service::all();
+
         return view('clients.booking', compact('services'));
     }
 
@@ -55,7 +56,7 @@ class BookingController extends Controller
             ]);
 
             // You might want to send confirmation email here
-            
+
             return redirect()
                 ->back()
                 ->with('success', 'Your booking has been submitted successfully! We will contact you shortly to confirm your appointment.');

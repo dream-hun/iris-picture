@@ -2,7 +2,7 @@
     <div class="text-center">
         <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Gallery</h2>
         <p class="mt-4 text-lg text-gray-500">A collection of some of my best work</p>
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mt-5">
             <!-- London Nights -->
             <div class="group relative overflow-hidden col-span-2 row-span-2">
                 <img src="{{ asset('gallery/fall-one.jpg') }}" alt="London Nights"
