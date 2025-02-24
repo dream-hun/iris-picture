@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home-Irispictures</title>
+    <title>Services - {{ config('app.name') }}</title>
     <meta name="description"
         content="Professional photography services and portfolio showcase. Capturing life's beautiful moments with artistic vision in canada.">
     <meta name="keywords"
@@ -34,7 +34,7 @@
         <!-- Content -->
         <div class="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
             <h1 class="text-5xl md:text-6xl font-bold mb-4">
-                Welcome to Irispicture
+                Services We offer 
             </h1>
             <div class="relative mb-8">
                 <p class="text-gray-600 text-lg mb-8">
@@ -48,27 +48,37 @@
         </div>
     </div>
 
-    <!-- Image Grid -->
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
-        <!-- Large Image 1 -->
-        <div class="aspect-w-4 aspect-h-5">
-            <img src="{{ asset('images/iris-hero.webp') }}" alt="Urban overpass" class="w-full h-auto object-cover" />
-        </div>
+    <div class="max-w-7xl mx-auto px-4 py-16">
+        <div class="grid gap-8 lg:grid-cols-3 sm:grid-cols-2">
+            <!-- Service Card 1 -->
+            @foreach ($services as $service)
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                    <img class="object-cover w-full h-56" src="{{ asset('images/iris-hero.webp') }}"
+                        alt="Wedding Photography">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                            {{ $service->name }}
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            Service Description
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-yellow-500 font-semibold">Starting at {{ $service->formattedPrice() }}</span>
+                            <a href="{{ route('booking.index') }}"
+                                class="bg-yellow-400 text-black px-6 py-2 rounded-full hover:bg-yellow-300 transition-colors duration-200">
+                                Book Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
 
-        <!-- Large Image 2 -->
-        <div class="aspect-w-4 aspect-h-5">
-            <img src="{{ asset('images/iris-hero-two.webp') }}" alt="Skyscraper" class="w-full h-auto object-cover" />
-        </div>
 
-        <!-- Small Image 1 -->
-        <div class="aspect-w-4 aspect-h-5">
-            <img src="{{ asset('images/iris-hero-three.webp') }}" alt="Cityscape" class="w-full h-auto object-cover" />
-        </div>
 
-        <!-- Small Image 2 -->
-        <div class="aspect-w-4 aspect-h-5">
-            <img src="{{ asset('images/iris-hero-four.webp') }}" alt="Sunset" class="w-full h-auto object-cover" />
         </div>
+    </div>
+<x-footer-component />
 </body>
 
 </html>
